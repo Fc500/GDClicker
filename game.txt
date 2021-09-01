@@ -1,0 +1,148 @@
+Let's make a game!
+name: GDClicker
+author: FcStudios
+desc: Become the best GD Player in the world with this fun idle game!
+created: 30/8/21
+version: 0.05
+ 
+ 
+CSS
+  #game
+  {
+    background:cornflowerblue;
+    font-family:"Times New Roman",Times,serif;
+    color:white;
+    background-repeat: no-repeat;
+    background-size: auto;
+  }
+ 
+ 
+  #game.filtersOn .thing.cantAfford.notOwned
+  {
+    filter:blur(3px);
+  }
+ 
+  .height {
+  width: 150px;
+  }
+ 
+.rounded {
+  border-radius: 50px;
+  margin: 20px;
+}
+ 
+.padding {
+  margin: 20px;
+  padding: 20px;
+}
+ 
+.clear {
+  background-color: rgba(0, 0, 0, 0);
+}
+ 
+.thing {
+  border-radius: 25%;
+}
+Settings
+ 
+//background: https://mcdn.wallpapersafari.com/medium/58/57/KgVLkF.gif
+//stylesheet:https://github.com/Fc500/GDClicker/blob/main/stylesheet.txt
+ 
+Resources
+*level
+  name:Levels
+  desc:The amount of levels you play.
+ 
+*createdLevels
+  name:Created Levels
+  desc:The level's you've made
+ 
+*vid|vids
+  name:Videos
+  desc:The amount of video's you've made
+ 
+Buttons
+*playLevels
+  desc:Click this to play 1 GD level!
+  on click:yield 1 level
+  class:bigButton hasFlares background
+  icon:https://cdn130.picsart.com/295292011008211.png
+ 
+ 
+Layout
+  *main
+  contains:res, buttons
+  *res
+    contains:Resources
+    class:fullWidth
+  *buttons
+    contains:Buttons
+*store
+  contains:buildings, upgrades
+  *buildings
+    contains:BulkDisplay, Buildings
+    header:Buildings
+    tooltip origin:left
+  *upgrades
+    contains:Upgrades
+    header:Upgrades
+    costs:hide
+    names:hide
+  *achievs
+    contains:Achievements
+    header: <b>Your achivements!</b>
+    in:buildings
+    class:rounded margin
+ 
+Buildings
+*GamingLaptop
+  name:Gaming Laptop
+  desc:Gives you a mediocure gaming laptop to play more levels.
+  on tick:yield 0.1 level
+  cost:10 level
+ 
+*phone
+  name:Phone
+  desc: A phone, used for playing more levels. Also unlocks the editor.
+  on tick:yield 1.0 level
+  on tick:yield 0.1 createdLevels
+  cost:100 level
+ 
+*GamingPC
+  name:Gaming PC
+  desc:Gives you a decent gaming PC to play even MORE levels.
+  on tick:yield 10.0 level
+  cost:500 level
+ 
+*pc
+  name:YouTube Videos
+  desc:Gives you a YouTube video to boost your credit
+  on tick:yield 1 vid
+  cost:1000 level
+ 
+ 
+Upgrades
+ 
+*60hz
+  name:60hz
+  desc:A mediocre refresh rate to further up your playing game (laptop)
+  passive:multiply yield of GamingLaptop by 2
+  cost:100 level
+ 
+*144hz
+  name:144hz
+  desc:A decent refresh rate to further up your playing game (laptop)
+  passive:multiply yield of GamingLaptop by 4
+  cost:500 level
+ 
+*editor
+  name:Level Editor I
+  desc:Level up your level-making game!
+  passive:multiply yield of phone by 10
+  cost: 1000 level
+ 
+Achievements
+*10clicks
+  name:Wowie! Ten whole levels!
+  desc:You've played 10 GD levels. Well done. Well done indeed.
+  req:10 playLevels:clicks
